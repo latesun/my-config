@@ -1,0 +1,8 @@
+{
+	"server":"35.221.235.221",
+	"server_port":5601,
+	"local_port":2000,
+	"password":"e4abb9380b4b45dfb05f05c8605432fa",
+	"timeout":600,
+	"method":"chacha20-ietf-poly1305"
+}
