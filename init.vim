@@ -59,11 +59,6 @@ Plug 'neomake/neomake'
 " Rust plugin
 Plug 'rust-lang/rust.vim'
 
-" Ruby plugin
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-
-
 " Code format
 Plug 'sbdchd/neoformat'
 Plug 'Chiel92/vim-autoformat'
@@ -80,17 +75,11 @@ Plug 'airblade/vim-gitgutter'
 " Heavy git tool
 Plug 'tpope/vim-fugitive'
 
-" Check code commit status
-" Plug 'junegunn/gv.vim'
-
 " Auto complete pairs
 Plug 'Raimondi/delimitMate'
 
 " Use tab to complete
 Plug 'ervandew/supertab'
-
-" Open dash to search api document. Only work in macOS
-Plug 'rizzatti/dash.vim'
 
 call plug#end()
 
@@ -168,8 +157,7 @@ let g:airline#extensions#clock#format = '%H:%M:%S'
 " Easy-motion
 nmap ss <Plug>(easymotion-s2)
 
-" Indent line (not working)
-"let g:indentLine_setColors = 0
+" Indent line
 autocmd Filetype json let g:indentLine_setConceal = 0
 let g:vim_json_syntax_conceal = 0
 let g:indentLine_color_term = 239
@@ -193,7 +181,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" let g:syntastic_go_checkers = ['go', 'errcheck']
 autocmd BufWritePre *.go :GoImports
 " autocmd BufWritePre *.go :GoMetaLinter
 
@@ -253,4 +240,3 @@ let NERDTreeShowHidden=1
 
 " Tagbar
 nnoremap <leader>t :TagbarToggle<CR>
-
