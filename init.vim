@@ -140,6 +140,7 @@ set cursorline
 " Enable window modify
 set modifiable
 
+set clipboard+=unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS SETTINGS
@@ -171,7 +172,7 @@ let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 let g:python_highlight_all = 1
 let g:jedi#goto_command = "<C-]>"
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python'
 
 " Enable vim-go autocomplete import on saving
 let g:go_fmt_command = "goimports"
