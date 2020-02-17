@@ -1,8 +1,10 @@
 ### My dotfiles
-#### 1. $HOME Path
+#### 1. Origin User
 - `~/.zshrc`
 - `~/.tmux.conf`
 - `~/.zprofile`
-
-#### 2. $HOME/.config
 - `~/.config/nvim/init.vim`
+
+#### 2. Super User
+- `/etc/environment`
+- `/etct/locale.conf`
