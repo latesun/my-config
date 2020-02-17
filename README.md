@@ -7,4 +7,4 @@
 
 #### 2. Super User
 - `/etc/environment`
-- `/etct/locale.conf`
+- `/etc/locale.conf`
