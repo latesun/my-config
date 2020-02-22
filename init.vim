@@ -3,16 +3,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use vim-plug as plugins manager
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
-" Add start page
+" Start page
 Plug 'mhinz/vim-startify'
 
-" Project directory tree
+" Directory tree
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
-" Beautiful icons
+" Icons
 Plug 'ryanoasis/vim-devicons'
 
 " Status bar
@@ -20,8 +20,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'enricobacis/vim-airline-clock'
 
-Plug 'tpope/vim-surround' " Opearte words surrouding
-Plug 'joshdick/onedark.vim' " Color theme
+" Opearte words surrouding
+Plug 'tpope/vim-surround'
 
 " Display indent line
 Plug 'Yggdroot/indentLine'
@@ -49,15 +49,12 @@ Plug 'easymotion/vim-easymotion'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python development plugin
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 
+" Asynchronous linting
 Plug 'neomake/neomake'
-
-" Rust plugin
-Plug 'rust-lang/rust.vim'
 
 " Code format
 Plug 'sbdchd/neoformat'
@@ -88,6 +85,7 @@ call plug#end()
 " BASE SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Jump where exited last time
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
@@ -107,6 +105,7 @@ set autoindent
 set cindent
 set tabstop=4
 set shiftwidth=4
+set columns=128
 filetype indent on
 
 " Enable syntax highlight
@@ -190,7 +189,6 @@ let g:rustfmt_autosave = 1
 
 " Set gitgutter update time 100ms
 set updatetime=100
-
 
 " Enable alignment
 let g:neoformat_basic_format_align = 1
