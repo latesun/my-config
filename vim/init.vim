@@ -233,10 +233,13 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" NERDTree
+" NERDTree shortcut
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>g :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+
+" NERDTree ingore files
+let NERDTreeIgnore=['\.pyc','\~$','\.git$', '\.idea', '.vscode']
 
 " Tagbar
 nnoremap <leader>t :TagbarToggle<CR>
