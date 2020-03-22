@@ -87,7 +87,7 @@ call plug#end()
 
 " Jump where exited last time
 if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " Change leader key
@@ -201,19 +201,19 @@ let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
 
 augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
+	autocmd!
+	autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 call neomake#configure#automake('nrwi', 500)
 let g:neomake_python_flake8_maker = {
-            \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
-            \ 'errorformat':
-            \ '%E%f:%l: could not compile,%-Z%p^,' .
-            \ '%A%f:%l:%c: %t%n %m,' .
-            \ '%A%f:%l: %t%n %m,' .
-            \ '%-G%.%#',
-            \ }
+			\ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
+			\ 'errorformat':
+			\ '%E%f:%l: could not compile,%-Z%p^,' .
+			\ '%A%f:%l:%c: %t%n %m,' .
+			\ '%A%f:%l: %t%n %m,' .
+			\ '%-G%.%#',
+			\ }
 let g:neomake_python_enabled_makers = ['flake8']
 
 
@@ -242,4 +242,4 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc','\~$','\.git$', '\.idea', '.vscode']
 
 " Tagbar
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap tt :TagbarToggle<CR>
