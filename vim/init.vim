@@ -87,7 +87,7 @@ call plug#end()
 
 " Jump where exited last time
 if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " Change leader key
@@ -167,28 +167,27 @@ let g:indentLine_char = '¦'
 " Open git-blame plugin, to avoid other plugin cover
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
-" python syntax
+" Enable deoplete when starting up
 let g:deoplete#enable_at_startup = 1
+
+" Enable python completion
 let g:jedi#completions_enabled = 0
 let g:python_highlight_all = 1
 let g:jedi#goto_command = "<C-]>"
-let g:python3_host_prog = '/usr/bin/python'
+" MacOS
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Enable vim-go autocomplete import on saving
 let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 autocmd BufWritePre *.go :GoImports
-" autocmd BufWritePre *.go :GoMetaLinter
+autocmd BufWritePre *.go :GoMetaLinter
 
-" Rust autosave
-let g:rustfmt_autosave = 1
-
-" Set gitgutter update time 100ms
+" Update code status interval for gitgutter
 set updatetime=100
 
 " Enable alignment
@@ -201,20 +200,11 @@ let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
 
 augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
+	autocmd!
+	autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 call neomake#configure#automake('nrwi', 500)
-let g:neomake_python_flake8_maker = {
-            \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
-            \ 'errorformat':
-            \ '%E%f:%l: could not compile,%-Z%p^,' .
-            \ '%A%f:%l:%c: %t%n %m,' .
-            \ '%A%f:%l: %t%n %m,' .
-            \ '%-G%.%#',
-            \ }
-let g:neomake_python_enabled_makers = ['flake8']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
