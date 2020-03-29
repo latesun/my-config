@@ -232,4 +232,4 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc','\~$','\.git$', '\.idea', '.vscode']
 
 " Tagbar
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap tt :TagbarToggle<CR>
