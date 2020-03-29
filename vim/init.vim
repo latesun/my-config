@@ -53,6 +53,10 @@ Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 
+" C/C++
+Plug 'zchee/deoplete-clang'
+Plug 'jsfaint/gen_tags.vim'
+
 " Asynchronous linting
 Plug 'neomake/neomake'
 
