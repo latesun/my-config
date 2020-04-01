@@ -93,7 +93,8 @@ if has("autocmd")
 endif
 
 " Change leader key
-let g:maplocalleader=';'
+let mapleader=';'
+let maplocalleader=';'
 
 " Disable compatible old vi
 set nocompatible
