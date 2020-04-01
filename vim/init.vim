@@ -9,7 +9,7 @@ call plug#begin()
 Plug 'mhinz/vim-startify'
 
 " Directory tree
-Plug Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'kristijanhusak/defx-icons'
 Plug 'kristijanhusak/defx-git'
 
