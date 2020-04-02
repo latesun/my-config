@@ -109,9 +109,6 @@ set tabstop=4
 set shiftwidth=4
 filetype indent on
 
-" avoid `[200~` paste error
-set t_BE=
-
 " Enable syntax highlight
 syntax on
 
@@ -142,8 +139,6 @@ set cursorline
 
 " Enable window modify
 set modifiable
-
-set clipboard+=unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS SETTINGS
