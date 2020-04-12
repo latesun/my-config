@@ -106,9 +106,6 @@ set tabstop=4
 set shiftwidth=4
 filetype indent on
 
-" avoid `[200~` paste error
-set t_BE=
-
 " Enable syntax highlight
 syntax on
 
@@ -139,8 +136,6 @@ set cursorline
 
 " Enable window modify
 set modifiable
-
-set clipboard+=unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS SETTINGS
@@ -226,7 +221,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 autocmd BufWritePre *.go :GoImports
-autocmd BufWritePre *.go :GoMetaLinter
+" autocmd BufWritePre *.go :GoMetaLinter
 
 " Update code status interval for gitgutter
 set updatetime=100
@@ -239,11 +234,6 @@ let g:neoformat_basic_format_retab = 1
 
 " Enable trimmming of trailing whitespace
 let g:neoformat_basic_format_trim = 1
-
-augroup fmt
-	autocmd!
-	autocmd BufWritePre * undojoin | Neoformat
-augroup END
 
 call neomake#configure#automake('nrwi', 500)
 
@@ -266,3 +256,6 @@ nnoremap <C-l> <C-w>l
 
 " Tagbar
 nnoremap tt :TagbarToggle<CR>
+
+" Neoformat
+nnoremap ff :Neoformat<CR>
