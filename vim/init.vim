@@ -77,9 +77,6 @@ Plug 'tpope/vim-fugitive'
 " Auto complete pairs
 Plug 'Raimondi/delimitMate'
 
-" Use tab to complete
-Plug 'ervandew/supertab'
-
 call plug#end()
 
 
