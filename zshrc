@@ -5,15 +5,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/lee/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting docker docker-compose)
+
+source $ZSH/oh-my-zsh.sh
 bindkey '^ ' autosuggest-accept
 
 export EDITOR=nvim
@@ -49,3 +48,9 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 alias j='fasd_cd -d'
+
+# fuck
+eval $(thefuck --alias)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
