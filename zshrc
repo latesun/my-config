@@ -20,6 +20,7 @@ export EDITOR=nvim
 alias vi=nvim
 alias lg=lazygit
 alias rg=ranger
+alias compose=docker-compose
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
