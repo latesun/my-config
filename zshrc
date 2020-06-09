@@ -21,6 +21,8 @@ alias vi=nvim
 alias lg=lazygit
 alias rg=ranger
 alias compose=docker-compose
+alias k=kubectl
+alias lzd='docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v ~/.config/lazydocker:/.config/jesseduffield/lazydocker lazyteam/lazydocker'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
