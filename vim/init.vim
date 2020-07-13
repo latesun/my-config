@@ -21,9 +21,6 @@ Plug 'enricobacis/vim-airline-clock'
 " Opearte words surrouding
 Plug 'tpope/vim-surround'
 
-" Display indent line
-Plug 'Yggdroot/indentLine'
-
 " Fuzzy query
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -43,24 +40,8 @@ Plug 'itchyny/vim-cursorword'
 " Jump anywhere you want
 Plug 'easymotion/vim-easymotion'
 
-" Go development plugin
+" Go plugin
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" Python development plugin
-Plug 'davidhalter/jedi-vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
-
-" C/C++
-Plug 'zchee/deoplete-clang'
-Plug 'jsfaint/gen_tags.vim'
-
-" Asynchronous linting
-Plug 'neomake/neomake'
-
-" Code format
-Plug 'sbdchd/neoformat'
-Plug 'Chiel92/vim-autoformat'
 
 " Code commentary
 Plug 'tpope/vim-commentary'
@@ -77,6 +58,19 @@ Plug 'tpope/vim-fugitive'
 " Auto complete pairs
 Plug 'Raimondi/delimitMate'
 
+" Theme
+Plug 'morhetz/gruvbox'
+
+" Auto completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Python plugin
+Plug 'davidhalter/jedi-vim'
+
+" Syntax checker
+Plug 'dense-analysis/ale'
+
+
 call plug#end()
 
 
@@ -90,11 +84,7 @@ if has("autocmd")
 endif
 
 " Change leader key
-let mapleader=';'
-let maplocalleader=';'
-
-" Disable compatible old vi
-set nocompatible
+let g:mapleader=';'
 
 " Show number line
 set number
@@ -137,18 +127,23 @@ set cursorline
 " Enable window modify
 set modifiable
 
+" Theme
+colorscheme gruvbox
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Defx
+let g:maplocalleader=';'
 nnoremap <silent> <LocalLeader>e
 			\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()`<CR>
 nnoremap <silent> <LocalLeader>a
 			\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
 
 call defx#custom#option('_', {
-			\ 'winwidth': 28,
+			\ 'winwidth': 35,
 			\ 'split': 'vertical',
 			\ 'direction': 'topleft',
 			\ 'show_ignored_files': 0,
@@ -183,7 +178,7 @@ function! s:defx_my_settings() abort
 endfunction
 
 " Airline theme
-let g:airline_theme='onedark'
+let g:airline_theme='gruvbox'
 " Enable powerline fonts
 let g:airline_powerline_fonts=1
 " Enable buffer top tabline
@@ -194,48 +189,36 @@ let g:airline#extensions#clock#format = '%H:%M:%S'
 " Easy-motion
 nmap ss <Plug>(easymotion-s2)
 
-" Indent line
-autocmd Filetype json let g:indentLine_setConceal = 0
-let g:vim_json_syntax_conceal = 0
-let g:indentLine_color_term = 239
-let g:indentLine_char = '¦'
-
 " Open git-blame plugin, to avoid other plugin cover
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
-" Enable deoplete when starting up
-let g:deoplete#enable_at_startup = 1
-
-" Enable python completion
-let g:jedi#completions_enabled = 0
-let g:python_highlight_all = 1
-let g:jedi#goto_command = "<C-]>"
-" MacOS
-" let g:python3_host_prog = '/usr/local/bin/python3'
-
-" Enable vim-go autocomplete import on saving
+" Vim-go
+let g:go_def_mode='godef'
+let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 autocmd BufWritePre *.go :GoImports
-" autocmd BufWritePre *.go :GoMetaLinter
 
-" Update code status interval for gitgutter
-set updatetime=100
+" Jedi
+let g:jedi#completions_enabled = 0
+let g:jedi#goto_command = "<C-]>"
 
-" Enable alignment
-let g:neoformat_basic_format_align = 1
+" Ale
+let g:ale_linters = {
+	\ 'python': ['pylint'],
+	\}
 
-" Enable tab to spaces conversion
-let g:neoformat_basic_format_retab = 1
-
-" Enable trimmming of trailing whitespace
-let g:neoformat_basic_format_trim = 1
-
-call neomake#configure#automake('nrwi', 500)
+let g:ale_fixers = {
+	\ 'json': ['prettier'],
+	\ 'python': ['yapf'],
+	\}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -254,8 +237,75 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Open buffers
+nnoremap <leader>b :Buffers<cr>
+
 " Tagbar
 nnoremap tt :TagbarToggle<CR>
 
-" Neoformat
-nnoremap ff :Neoformat<CR>
+" Fzf
+nnoremap <C-p> :FZF<cr>
+
+" Ale format
+nnoremap ff :ALEFix<CR>
+
+" coc
+let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-json']
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return ! col || getline('.')[col - 1] =~? '\s'
+endfunction
+
+augroup user_plugin_coc
+	autocmd!
+	autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
+augroup END
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <C-space> coc#refresh()
+
+" Movement within 'ins-completion-menu'
+imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
+imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
+
+" Scroll pages in menu
+inoremap <expr><C-f> pumvisible() ? "\<PageDown>" : "\<Right>"
+inoremap <expr><C-b> pumvisible() ? "\<PageUp>" : "\<Left>"
+imap     <expr><C-d> pumvisible() ? "\<PageDown>" : "\<C-d>"
+imap     <expr><C-u> pumvisible() ? "\<PageUp>" : "\<C-u>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap gs <Plug>(coc-git-chunkinfo)
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+" show commit contains current position
+nmap gC <Plug>(coc-git-commit)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+	if (index(['vim', 'help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	else
+		let l:found = CocAction('doHover')
+	endif
+endfunction
