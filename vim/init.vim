@@ -70,6 +70,12 @@ Plug 'davidhalter/jedi-vim'
 " Syntax checker
 Plug 'dense-analysis/ale'
 
+" Undo history
+Plug 'mbbill/undotree'
+
+" Align
+Plug 'junegunn/vim-easy-align'
+
 
 call plug#end()
 
@@ -138,23 +144,23 @@ colorscheme gruvbox
 " Defx
 let g:maplocalleader=';'
 nnoremap <silent> <LocalLeader>e
-			\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()`<CR>
+	\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()`<CR>
 nnoremap <silent> <LocalLeader>a
-			\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
+	\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
 
 call defx#custom#option('_', {
-			\ 'winwidth': 35,
-			\ 'split': 'vertical',
-			\ 'direction': 'topleft',
-			\ 'show_ignored_files': 0,
-			\ 'buffer_name': 'defxplorer',
-			\ 'toggle': 1,
-			\ 'columns': 'indent:git:icons:filename',
-			\ 'resume': 1,
-			\ 'ignored_files':
-			\     '.mypy_cache,.pytest_cache,.git,.hg,.svn,.stversions,.idea,.vscode'
-			\   . ',__pycache__,.sass-cache,*.egg-info,.DS_Store,*.pyc,*.swp'
-			\ })
+	\ 'winwidth': 35,
+	\ 'split': 'vertical',
+	\ 'direction': 'topleft',
+	\ 'show_ignored_files': 0,
+	\ 'buffer_name': 'defxplorer',
+	\ 'toggle': 1,
+	\ 'columns': 'indent:git:icons:filename',
+	\ 'resume': 1,
+	\ 'ignored_files':
+	\     '.mypy_cache,.pytest_cache,.git,.hg,.svn,.stversions,.idea,.vscode'
+	\   . ',__pycache__,.sass-cache,*.egg-info,.DS_Store,*.pyc,*.swp'
+	\ })
 
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
@@ -185,6 +191,7 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 " Set time display format
 let g:airline#extensions#clock#format = '%H:%M:%S'
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " Easy-motion
 nmap ss <Plug>(easymotion-s2)
@@ -212,6 +219,7 @@ let g:jedi#goto_command = "<C-]>"
 
 " Ale
 let g:ale_linters = {
+	\ 'go': ['golint', 'go vet', 'go build'],
 	\ 'python': ['pylint'],
 	\}
 
@@ -219,6 +227,8 @@ let g:ale_fixers = {
 	\ 'json': ['prettier'],
 	\ 'python': ['yapf'],
 	\}
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -249,14 +259,17 @@ nnoremap <C-p> :FZF<cr>
 " Ale format
 nnoremap ff :ALEFix<CR>
 
+" Undo
+nnoremap <leader>u :UndotreeToggle<CR>
+
 " coc
 let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-json']
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+	\ pumvisible() ? coc#_select_confirm() :
+	\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	\ <SID>check_back_space() ? "\<TAB>" :
+	\ coc#refresh()
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
