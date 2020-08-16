@@ -221,11 +221,15 @@ let g:jedi#goto_command = "<C-]>"
 let g:ale_linters = {
 	\ 'go': ['golint', 'go vet', 'go build'],
 	\ 'python': ['pylint'],
+	\ 'c': ['cppcheck'],
+	\ 'cpp': ['cppcheck'],
 	\}
 
 let g:ale_fixers = {
 	\ 'json': ['prettier'],
 	\ 'python': ['yapf'],
+	\ 'c': ['astyle'],
+	\ 'cpp': ['astyle'],
 	\}
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚡'
