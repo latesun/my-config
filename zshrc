@@ -154,8 +154,6 @@ alias j='fasd_cd -d'
 export GOPATH=$HOME/workspace/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-export BINDO_COMMON_CONFIG_FILE=$GOPATH/src/bindolabs/bindoio/ci/config/unittest.yaml
-export BINDO_COMMON_TEST_CONFIG_FILE=$GOPATH/src/bindolabs/bindoio/ci/config/unittest.yaml
 
 # Open proxy
 proxy() {
