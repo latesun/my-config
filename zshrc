@@ -135,10 +135,11 @@ bindkey '^ ' autosuggest-accept
 alias vi=nvim
 alias vim=nvim
 alias lg=lazygit
-alias rg='TERM=xterm ranger'
+alias ranger='TERM=xterm ranger'
 alias spy="when-changed -r -v -1 -s"
 alias k=kubectl
 alias python=python3
+alias redis-cli="docker exec -it redis redis-cli"
 export EDITOR=nvim
 
 # Fasd
@@ -175,3 +176,4 @@ unproxy() {
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+source /usr/share/nvm/init-nvm.sh
