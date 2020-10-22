@@ -147,7 +147,7 @@ nnoremap <silent> <LocalLeader>a
 	\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
 
 call defx#custom#option('_', {
-	\ 'winwidth': 30,
+	\ 'winwidth': 35,
 	\ 'split': 'vertical',
 	\ 'direction': 'topleft',
 	\ 'show_ignored_files': 0,
@@ -209,7 +209,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1
 autocmd BufWritePre *.go :GoImports
 
