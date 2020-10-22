@@ -64,9 +64,6 @@ Plug 'morhetz/gruvbox'
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Python plugin
-Plug 'davidhalter/jedi-vim'
-
 " Syntax checker
 Plug 'dense-analysis/ale'
 
@@ -75,7 +72,6 @@ Plug 'mbbill/undotree'
 
 " Align
 Plug 'junegunn/vim-easy-align'
-
 
 call plug#end()
 
@@ -110,6 +106,8 @@ set hlsearch
 
 " Ignore case
 set ignorecase
+" If there is a capital letter, switch to case-sensitivce lookup
+set smartcase
 
 " Disable auto backup
 set nobackup
@@ -149,7 +147,7 @@ nnoremap <silent> <LocalLeader>a
 	\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
 
 call defx#custom#option('_', {
-	\ 'winwidth': 35,
+	\ 'winwidth': 30,
 	\ 'split': 'vertical',
 	\ 'direction': 'topleft',
 	\ 'show_ignored_files': 0,
@@ -200,7 +198,7 @@ nmap ss <Plug>(easymotion-s2)
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 " Vim-go
-let g:go_def_mode='godef'
+let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 let g:go_fmt_command = "goimports"
 let g:go_highlight_build_constraints = 1
@@ -213,23 +211,16 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 autocmd BufWritePre *.go :GoImports
 
-" Jedi
-let g:jedi#completions_enabled = 0
-let g:jedi#goto_command = "<C-]>"
-
 " Ale
 let g:ale_linters = {
 	\ 'go': ['golint', 'go vet', 'go build'],
-	\ 'python': ['pylint'],
-	\ 'c': ['cppcheck'],
-	\ 'cpp': ['cppcheck'],
+	\ 'json': ['jq', 'prettier'],
+	\ 'yaml': ['prettier']
 	\}
 
 let g:ale_fixers = {
-	\ 'json': ['prettier'],
-	\ 'python': ['yapf'],
-	\ 'c': ['astyle'],
-	\ 'cpp': ['astyle'],
+	\ 'json': ['jq', 'prettier'],
+	\ 'yaml': ['prettier']
 	\}
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚡'
@@ -266,8 +257,13 @@ nnoremap ff :ALEFix<CR>
 " Undo
 nnoremap <leader>u :UndotreeToggle<CR>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COC CONFIG
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " coc
-let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-json']
+let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-yaml']
 
 inoremap <silent><expr> <TAB>
 	\ pumvisible() ? coc#_select_confirm() :
