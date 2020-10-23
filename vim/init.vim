@@ -265,8 +265,9 @@ nnoremap ff :ALEFix<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " Youdao
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+vnoremap <leader>t :<C-u>Ydv<CR>
+nnoremap <leader>t :<C-u>Ydc<CR>
+" Input a word to translate
 noremap <leader>yd :<C-u>Yde<CR>
 
 
