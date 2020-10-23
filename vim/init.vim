@@ -73,6 +73,9 @@ Plug 'mbbill/undotree'
 " Align
 Plug 'junegunn/vim-easy-align'
 
+" Translator
+Plug 'ianva/vim-youdao-translater'
+
 call plug#end()
 
 
@@ -212,6 +215,9 @@ let g:go_highlight_types = 1
 let g:go_highlight_function_calls = 1
 autocmd BufWritePre *.go :GoImports
 
+" Vim-interestingwords
+let g:interestingWordsRandomiseColors = 1
+
 " Ale
 let g:ale_linters = {
 	\ 'go': ['golint', 'go vet', 'go build'],
@@ -257,6 +263,11 @@ nnoremap ff :ALEFix<CR>
 
 " Undo
 nnoremap <leader>u :UndotreeToggle<CR>
+
+" Youdao
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
