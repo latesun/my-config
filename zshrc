@@ -132,6 +132,8 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey -v
 bindkey '^ ' autosuggest-accept
 
+export EDITOR=nvim
+
 alias vi=nvim
 alias vim=nvim
 alias lg=lazygit
@@ -140,7 +142,17 @@ alias spy="when-changed -r -v -1 -s"
 alias k=kubectl
 alias python=python3
 alias redis-cli="docker exec -it redis redis-cli"
-export EDITOR=nvim
+alias gs="git status"
+alias ga="git add"
+alias gpl="git pull"
+alias gl="git log"
+alias gp="git push"
+alias gc="git commit"
+alias compose="docker-compose"
+alias gd="sshpass -p Dianqi227 ssh -o StrictHostKeyChecking=no latesun.li@jumpserver.wetax.com.cn"
+alias wifi-gd="nmcli dev wifi connect Golden password Golden888"
+alias wifi-iphone="nmcli dev wifi list && nmcli dev wifi connect Latesun password dianqi227"
+alias vpn="sudo openvpn --daemon --cd /etc/openvpn --config client.ovpn --log-append /var/log/openvpn.log"
 
 # Fasd
 eval "$(fasd --init auto)"
@@ -156,11 +168,14 @@ export GOPATH=$HOME/workspace/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
+# thefucker
+eval $(thefuck --alias)
+
 # Open proxy
 proxy() {
 	export http_proxy="http://127.0.0.1:1087"
 	export https_proxy="http://127.0.0.1:1087"
-	export no_proxy="127.0.0.1,localhost,192.168.124.21"
+	export no_proxy="127.0.0.1,localhost,192.168.124.21,10.98.15.88"
 	echo "HTTP Proxy on"
 }
 
@@ -177,3 +192,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 source /usr/share/nvm/init-nvm.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$HOME/.cargo/bin:$PATH"
