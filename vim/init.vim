@@ -1,4 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INIT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if empty(glob('${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim" --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -20,6 +29,7 @@ Plug 'enricobacis/vim-airline-clock'
 
 " Opearte words surrouding
 Plug 'tpope/vim-surround'
+Plug 'gcmt/wildfire.vim'
 
 " Fuzzy query
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -75,6 +85,9 @@ Plug 'junegunn/vim-easy-align'
 
 " Translator
 Plug 'ianva/vim-youdao-translater'
+
+" Protobuf format
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -229,8 +242,8 @@ let g:ale_fixers = {
 	\ 'json': ['jq', 'prettier'],
 	\ 'yaml': ['prettier']
 	\}
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
+let g:ale_sign_error = 'ﰁ'
+let g:ale_sign_warning = '異'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -278,6 +291,8 @@ noremap <leader>yd :<C-u>Yde<CR>
 " coc
 let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-yaml']
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 inoremap <silent><expr> <TAB>
 	\ pumvisible() ? coc#_select_confirm() :
 	\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -324,6 +339,9 @@ nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 " show commit contains current position
 nmap gC <Plug>(coc-git-commit)
+
+" Format
+nmap <leader>f <Plug>(coc-format-selected)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
