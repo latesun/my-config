@@ -1,10 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " INIT
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if empty(glob('${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim'))
-  silent !curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim" --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source ~/.config/nvim/init.vim
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -12,7 +12,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use vim-plug as plugins manager
-call plug#begin()
+call plug#begin("~/.config/nvim/plugged")
 
 " Start page
 Plug 'mhinz/vim-startify'
@@ -89,6 +89,9 @@ Plug 'ianva/vim-youdao-translater'
 " Protobuf format
 Plug 'rhysd/vim-clang-format'
 
+" Codelf
+Plug 'voldikss/vim-codelf'
+
 call plug#end()
 
 
@@ -106,6 +109,8 @@ let g:mapleader=';'
 
 " Show number line
 set number
+
+set colorcolumn=121
 
 " Enable auto indent
 set autoindent
@@ -226,6 +231,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_highlight_function_calls = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'golangci-lint']
 autocmd BufWritePre *.go :GoImports
 
 " Vim-interestingwords
@@ -244,6 +250,11 @@ let g:ale_fixers = {
 	\}
 let g:ale_sign_error = 'ﰁ'
 let g:ale_sign_warning = '異'
+
+" Codelf
+let g:codelf_proxy_url='http://127.0.0.1:1087'
+inoremap <silent> <F9> <C-R>=codelf#start()<CR>
+nnoremap <silent> <F9> :call codelf#start()<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
