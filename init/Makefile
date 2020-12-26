@@ -1,42 +1,20 @@
-oh_my_zsh := $(HOME)/.oh-my-zsh
-p10k_theme := $(HOME)/.oh-my-zsh/custom/themes/powerlevel10k
-zsh_suggestion_plugin := $(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-zsh_completion_plugin := $(HOME)/.oh-my-zsh/custom/plugins/zsh-completions
+SHELL := /bin/zsh
+zinit := $(HOME)/.zinit
 
-.PHONY: zsh
-zsh: plug_manager plug_theme plug_autosuggestions plug_completions
+.PHONY: zsh zinit
+zsh: plug_manager zshrc
 
 plug_manager:
-ifeq ($(wildcard $(oh_my_zsh)),)
-	@echo "Install oh-my-zsh ..."
-	sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ifeq ($(wildcard $(zinit)),)
+	@echo "[INFO]: install zinit..."
+	@mkdir $(zinit)
+	git clone https://github.com/zdharma/zinit.git $(zinit)/bin
 else
-	@echo "ohmyzsh has already installed"
-endif
-
-plug_theme:
-ifeq ($(wildcard $(p10k_theme)),)
-	@echo "Install p10k theme ..."
-	git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git $(p10k_theme)
-else
-	@echo "p10k theme has already installed"
-endif
-
-plug_autosuggestions:
-ifeq ($(wildcard $(zsh_suggestion_plugin)),)
-	@echo "Install autosuggestions plugin ..."
-	git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $(zsh_suggestion_plugin)
-else
-	@echo "autosuggestion plugin has already installed"
-endif
-
-plug_completions:
-ifeq ($(wildcard $(zsh_completion_plugin)),)
-	@echo "Install completions plugin ..."
-	git clone --depth=1 https://github.com/zsh-users/zsh-completions $(zsh_completion_plugin)
-else
-	@echo "completions plugin has already installed"
+	@echo "[INFO]: zinit has already installed."
 endif
 
 zshrc:
+	@echo "[INFO]: update zshrc."
 	cp ../zshrc ~/.zshrc
+	source ~/.zshrc
+	@echo "[INFO]: zsh init finished."
