@@ -7,6 +7,7 @@ zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 ## 1.2 Theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 #  2. Key Binding
 ## 2.1 Use ctrl+space select suggestion
