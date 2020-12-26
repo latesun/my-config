@@ -6,7 +6,9 @@
     "yaml",
     "yml",
     "sql",
-    "python"
+    "python",
+    "c",
+    "cpp"
   ],
   "languageserver": {
     "golang": {

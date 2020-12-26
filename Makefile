@@ -25,9 +25,9 @@ vim:
 ifeq ($(wildcard $(nvim)),)
 	mkdir -p $(nvim)
 endif
-ifeq ($(wildcard $(nvim)/init.vim),)
+ifneq ($(wildcard $(nvim)/init.vim),)
 	@echo "[INFO]: load vimrc..."
-	cp vim/init.vim $(nvim)
+	cp vim/{init.vim,coc-settings.json} $(nvim)
 	@echo "[INFO]: load vimrc sucessfully."
 else
 	@echo "[INFO]: vimrc has already existed."
