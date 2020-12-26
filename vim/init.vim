@@ -74,9 +74,6 @@ Plug 'morhetz/gruvbox'
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Syntax checker
-Plug 'dense-analysis/ale'
-
 " Undo history
 Plug 'mbbill/undotree'
 
@@ -88,9 +85,6 @@ Plug 'ianva/vim-youdao-translater'
 
 " Protobuf format
 Plug 'rhysd/vim-clang-format'
-
-" Codelf
-Plug 'voldikss/vim-codelf'
 
 call plug#end()
 
@@ -237,25 +231,6 @@ autocmd BufWritePre *.go :GoImports
 " Vim-interestingwords
 let g:interestingWordsRandomiseColors = 1
 
-" Ale
-let g:ale_linters = {
-	\ 'go': ['golint', 'go vet', 'go build'],
-	\ 'json': ['jq', 'prettier'],
-	\ 'yaml': ['prettier']
-	\}
-
-let g:ale_fixers = {
-	\ 'json': ['jq', 'prettier'],
-	\ 'yaml': ['prettier']
-	\}
-let g:ale_sign_error = 'ﰁ'
-let g:ale_sign_warning = '異'
-
-" Codelf
-let g:codelf_proxy_url='http://127.0.0.1:1087'
-inoremap <silent> <F9> <C-R>=codelf#start()<CR>
-nnoremap <silent> <F9> :call codelf#start()<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SHORTCUT KEY SETTINGS
@@ -282,9 +257,6 @@ nnoremap tt :TagbarToggle<CR>
 " Fzf
 nnoremap <C-p> :FZF<cr>
 
-" Ale format
-nnoremap ff :ALEFix<CR>
-
 " Undo
 nnoremap <leader>u :UndotreeToggle<CR>
 
@@ -300,59 +272,21 @@ noremap <leader>yd :<C-u>Yde<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " coc
-let g:coc_global_extensions = ['coc-snippets', 'coc-json', 'coc-yaml']
+let g:coc_global_extensions = ["coc-snippets", "coc-json", "coc-yaml", "coc-prettier"]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Format :call CocAction('format')
 
-inoremap <silent><expr> <TAB>
-	\ pumvisible() ? coc#_select_confirm() :
-	\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
-
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-function! s:check_back_space() abort
-	let col = col('.') - 1
-	return ! col || getline('.')[col - 1] =~? '\s'
-endfunction
-
-augroup user_plugin_coc
-	autocmd!
-	autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
-augroup END
-
-" use <c-space>for trigger completion
-inoremap <silent><expr> <C-space> coc#refresh()
-
-" Movement within 'ins-completion-menu'
-imap <expr><C-j>   pumvisible() ? "\<Down>" : "\<C-j>"
-imap <expr><C-k>   pumvisible() ? "\<Up>" : "\<C-k>"
-
-" Scroll pages in menu
-inoremap <expr><C-f> pumvisible() ? "\<PageDown>" : "\<Right>"
-inoremap <expr><C-b> pumvisible() ? "\<PageUp>" : "\<Left>"
-imap     <expr><C-d> pumvisible() ? "\<PageDown>" : "\<C-d>"
-imap     <expr><C-u> pumvisible() ? "\<PageUp>" : "\<C-u>"
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nmap gs <Plug>(coc-git-chunkinfo)
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
 " show commit contains current position
 nmap gC <Plug>(coc-git-commit)
-
-" Format
-nmap <leader>f <Plug>(coc-format-selected)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
