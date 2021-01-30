@@ -1,11 +1,17 @@
 #  1. zinit
 source ~/.zinit/bin/zinit.zsh
-## 1.1. Plugins
+## 1.1. Official Plugins
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
-## 1.2 Theme
+
+## 1.2 Third Party Plugins
+zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh'
+zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+
+## 1.3 Theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -45,6 +51,7 @@ alias vpn="sudo openvpn --daemon --cd /etc/openvpn --config client.ovpn --log-ap
 alias mydev="mycli -u gordon -h dev.db -p "$devps
 alias mytest="mycli -u gordon -h test.db -p "$devps
 alias myprod="mycli -u gordon -h prod.db -p "$prodps
+alias rds-dev="docker exec -it redis redis-cli -h 10.21.40.11 --pass 63KxsHOY4g939Apq --raw"
 
 #  5. Third Party Plugins
 ## 5.1 Fasd
@@ -74,3 +81,4 @@ unproxy() {
 	unset no_proxy
 	echo "[INFO]: http proxy off"
 }
+[[ ! -f ~/.kubecm ]] || source ~/.kubecm
