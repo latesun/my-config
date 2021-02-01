@@ -29,10 +29,6 @@ export EDITOR=nvim
 export GOPATH=$HOME/workspace/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-## 3.3 Customize
-export devps="4qYAEZ6scVNYPLTWRviT"
-export prodps="ByGd4dbE2vqphfOQLdDg"
-
 #  4. Short Command
 ## 4.1 Common
 alias vi=nvim
@@ -44,14 +40,7 @@ alias k=kubectl
 alias python=python3
 alias redis-cli="docker exec -it redis redis-cli"
 ## 4.2 Customize
-alias gd="sshpass -p Dianqi227 ssh -o StrictHostKeyChecking=no latesun.li@jumpserver.wetax.com.cn"
-alias wifi-gd="nmcli dev wifi connect Golden password Golden888"
-alias wifi-iphone="nmcli dev wifi list && nmcli dev wifi connect Latesun password dianqi227"
 alias vpn="sudo openvpn --daemon --cd /etc/openvpn --config client.ovpn --log-append /var/log/openvpn.log"
-alias mydev="mycli -u gordon -h dev.db -p "$devps
-alias mytest="mycli -u gordon -h test.db -p "$devps
-alias myprod="mycli -u gordon -h prod.db -p "$prodps
-alias rds-dev="docker exec -it redis redis-cli -h 10.21.40.11 --pass 63KxsHOY4g939Apq --raw"
 
 #  5. Third Party Plugins
 ## 5.1 Fasd
