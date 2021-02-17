@@ -6,14 +6,20 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 
-## 1.2 Third Party Plugins
+## 1.2 Compinit
+autoload -Uz compinit
+compinit
+
+## 1.3 Third Party Plugins
 zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh'
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+source <(kubectl completion zsh)
 
-## 1.3 Theme
+## 1.4 Theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 #  2. Key Binding
 ## 2.1 Use ctrl+space select suggestion
@@ -29,14 +35,18 @@ export EDITOR=nvim
 export GOPATH=$HOME/workspace/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
+
+
 #  4. Short Command
 ## 4.1 Common
 alias vi=nvim
 alias vim=nvim
+alias ls=exa
 alias lg=lazygit
 alias ranger='TERM=xterm ranger'
 alias spy="when-changed -r -v -1 -s"
 alias k=kubectl
+complete -F __start_kubectl k
 alias python=python3
 alias redis-cli="docker exec -it redis redis-cli"
 ## 4.2 Customize
