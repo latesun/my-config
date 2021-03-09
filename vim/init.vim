@@ -17,11 +17,6 @@ call plug#begin("~/.config/nvim/plugged")
 " Start page
 Plug 'mhinz/vim-startify'
 
-" Directory tree
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'kristijanhusak/defx-icons'
-Plug 'kristijanhusak/defx-git'
-
 " Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -104,7 +99,7 @@ let g:mapleader=';'
 " Show number line
 set number
 
-set colorcolumn=121
+set colorcolumn=81
 
 " Enable auto indent
 set autoindent
@@ -154,47 +149,10 @@ colorscheme gruvbox
 " PLUGINS SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Defx
 let g:maplocalleader=';'
-nnoremap <silent> <LocalLeader>e
-	\ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()`<CR>
-nnoremap <silent> <LocalLeader>a
-	\ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
 
-call defx#custom#option('_', {
-	\ 'winwidth': 35,
-	\ 'split': 'vertical',
-	\ 'direction': 'topleft',
-	\ 'show_ignored_files': 0,
-	\ 'buffer_name': 'defxplorer',
-	\ 'toggle': 1,
-	\ 'columns': 'indent:git:icons:filename',
-	\ 'resume': 1,
-	\ 'ignored_files':
-	\     '.mypy_cache,.pytest_cache,.git,.hg,.svn,.stversions,.idea,.vscode'
-	\   . ',__pycache__,.sass-cache,*.egg-info,.DS_Store,*.pyc,*.swp'
-	\ })
-
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-	nnoremap <silent><buffer><expr> <CR> defx#do_action('multi', ['drop'])
-	nnoremap <silent><buffer><expr> q defx#do_action('quit')
-	nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
-	nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-	nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
-	nnoremap <silent><buffer><expr> d defx#do_action('remove')
-	nnoremap <silent><buffer><expr> r defx#do_action('rename')
-	nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-	nnoremap <silent><buffer><expr> c defx#do_action('copy')
-	nnoremap <silent><buffer><expr> m defx#do_action('move')
-	nnoremap <silent><buffer><expr> p defx#do_action('paste')
-	nnoremap <silent><buffer><expr> n defx#do_action('new_file')
-	nnoremap <silent><buffer><expr> N defx#do_action('new_directory')
-	nnoremap <silent><buffer><expr> U defx#do_action('cd', ['..'])
-	nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
-	nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
-	nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-endfunction
+" coc-explorer
+nmap <leader>e :CocCommand explorer<CR>
 
 " Airline theme
 let g:airline_theme='gruvbox'
