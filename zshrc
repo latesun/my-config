@@ -11,7 +11,6 @@ autoload -Uz compinit
 compinit
 
 ## 1.3 Third Party Plugins
-zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/raw/master/plugins/git/git.plugin.zsh'
 zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit snippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 source <(kubectl completion zsh)
@@ -23,10 +22,10 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 #  2. Key Binding
 ## 2.1 Use ctrl+space select suggestion
-bindkey '^ ' autosuggest-accept
+bindkey "^ " autosuggest-accept
 ## 2.2 Use ctrl+p/n select before/next substring
-bindkey '^p' history-substring-search-up
-bindkey '^n' history-substring-search-down
+bindkey "^p" history-substring-search-up
+bindkey "^n" history-substring-search-down
 
 #  3. Environment Args
 ## 1.1 Select default editor
@@ -42,15 +41,18 @@ export PATH=$PATH:$GOBIN
 alias vi=nvim
 alias vim=nvim
 alias ls=exa
+alias ll="exa -l"
+alias tree="tree -C"
 alias lg=lazygit
-alias ranger='TERM=xterm ranger'
+alias ranger="TERM=xterm ranger"
 alias spy="when-changed -r -v -1 -s"
 alias k=kubectl
 complete -F __start_kubectl k
 alias python=python3
-alias redis-cli="docker exec -it redis redis-cli"
 ## 4.2 Customize
-alias vpn="sudo openvpn --daemon --cd /etc/openvpn --config client.ovpn --log-append /var/log/openvpn.log"
+alias gd="sshpass -p password ssh -o StrictHostKeyChecking=no user@gmail.com"
+alias mgo-dev="mongo admin -u user -p password --host 127.0.0.1:27017"
+alias rds-dev="redis-cli -h 127.0.0.1 -p 6379 -a password"
 
 #  5. Third Party Plugins
 ## 5.1 Fasd
@@ -61,7 +63,7 @@ if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
 fi
 source "$fasd_cache"
 unset fasd_cache
-alias j='fasd_cd -d'
+alias j="fasd_cd -d"
 ## 5.2 Fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
