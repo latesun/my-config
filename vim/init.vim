@@ -72,14 +72,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Undo history
 Plug 'mbbill/undotree'
 
-" Align
-Plug 'junegunn/vim-easy-align'
-
 " Translator
 Plug 'ianva/vim-youdao-translater'
-
-" Protobuf format
-Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -214,6 +208,10 @@ nnoremap tt :TagbarToggle<CR>
 
 " Fzf
 nnoremap <C-p> :FZF<cr>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 " Undo
 nnoremap <leader>u :UndotreeToggle<CR>
@@ -230,12 +228,15 @@ noremap <leader>yd :<C-u>Yde<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " coc
-let g:coc_global_extensions = ["coc-snippets", "coc-json", "coc-yaml", "coc-prettier"]
+let g:coc_global_extensions = ["coc-json", "coc-yaml", "coc-prettier", "coc-clangd", "coc-explorer"]
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 command! -nargs=0 Format :call CocAction('format')
 
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Format C/C++/Proto
+nnoremap <leader>f :ClangFormat<CR>
+
+nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
