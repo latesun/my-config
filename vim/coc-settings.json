@@ -1,5 +1,4 @@
 {
-  "python.formatting.provider": "yapf",
   "coc.preferences.formatOnSaveFiletypes": [
     "json",
     "markdown",
@@ -17,5 +16,6 @@
       "trace.server": "verbose",
       "filetypes": ["go"]
     }
-  }
+  },
+  "explorer.icon.enableNerdfont": true
 }
