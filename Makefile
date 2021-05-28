@@ -1,7 +1,8 @@
-SHELL := /bin/zsh
+SHELL := /bin/bash
 .PHONY: zsh plug_manager zshrc \
 	vim vim_plug vimrc \
-	tmux
+	tmux \
+	ubuntu
 
 zinit := $(HOME)/.zinit
 zsh: plug_manager zshrc
@@ -10,7 +11,7 @@ plug_manager:
 ifeq ("$(wildcard $(zinit))","")
 	@echo "[INFO]: install zinit..."
 	@mkdir $(zinit)
-	git clone --depth=1 https://github.com/zdharma/zinit.git $(zinit)/bin
+	git clone --depth=1 https://github.com.cnpmjs.org/zdharma/zinit.git $(zinit)/bin
 else
 	@echo "[INFO]: zinit has already installed."
 endif
@@ -18,7 +19,7 @@ endif
 zshrc:
 	@echo "[INFO]: make zsh as default shell."
 	chsh -s $$(which zsh)
-	compaudit | xargs chown -R $$(whoami)
+	#compaudit | xargs chown -R $$(whoami) # TODO: check if keep it
 	@echo "[INFO]: update zshrc."
 	cp zshrc ~/.zshrc
 	source ~/.zshrc
@@ -38,14 +39,39 @@ else
 endif
 
 mac_tools:
-	@echo "[INFO]: install tools for macOS."
+	@echo "[INFO]: install tools for macOS..."
 	brew install --HEAD neovim tmux exa bash-completion go nodejs
 
+ubuntu: u_tools u_go u_neovim u_node u_lazygit
+
+u_tools:
+	@echo "[INFO]: install tools for ubuntu"
+	sudo apt install -y curl exa tmux neofetch openssh-server
+
+u_go:
+	@echo "[INFO]: add golang repository..."
+	sudo add-apt-repository ppa:longsleep/golang-backports
+	sudo apt update && sudo apt install -y golang-go
+
+u_neovim:
+	@echo "[INFO]: add neovim repository..."
+	sudo add-apt-repository ppa:neovim-ppa/unstable
+	sudo apt update && sudo apt install -y neovim python3-neovim
+
+u_node:
+	sudo apt install -y nodejs npm
+	sudo npm config set registry https://registry.npm.taobao.org
+
+u_lazygit:
+	sudo add-apt-repository ppa:lazygit-team/release
+	sudo apt-get update
+	sudo apt-get install lazygit
+
 fasd:
-	mkdir tmp && cd tmp
-	cd tmp && git clone --depth=1 https://github.com/clvv/fasd.git && cd fasd && make install
+	mkdir tmp 
+	cd tmp && git clone --depth=1 https://github.com.cnpmjs.org/clvv/fasd.git && cd fasd && sudo make install
 	rm -rf tmp
 
 tmux:
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	git clone https://github.com.cnpmjs.org/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	cp tmux.conf ~/.tmux.conf
