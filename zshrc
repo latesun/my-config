@@ -46,10 +46,21 @@ alias tree="tree -C"
 alias lg=lazygit
 alias ranger="TERM=xterm ranger"
 alias spy="when-changed -r -v -1 -s"
-alias k=kubectl
-complete -F __start_kubectl k
 alias python=python3
-## 4.2 Customize
+## 4.2 kubectl get resource
+alias kubectl="kubecolor"
+alias k="kubecolor"
+alias kn="kubectl get nodes -o wide"
+alias kp="kubectl get pods -o wide"
+alias kd="kubectl get deployment -o wide"
+alias ks="kubectl get svc -o wide"
+## 4.3 kubectl describe resources
+alias kdp="kubectl describe pod"
+alias kdd="kubectl describe deployment"
+alias kds="kubectl describe service"
+alias kdn="kubectl describe node"
+
+## 4.4 Customize
 alias gd="sshpass -p password ssh -o StrictHostKeyChecking=no user@gmail.com"
 alias mgo-dev="mongo admin -u user -p password --host 127.0.0.1:27017"
 alias rds-dev="redis-cli -h 127.0.0.1 -p 6379 -a password"
