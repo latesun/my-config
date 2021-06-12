@@ -46,7 +46,7 @@ ubuntu: u_tools u_go u_neovim u_node u_lazygit
 
 u_tools:
 	@echo "[INFO]: install tools for ubuntu"
-	sudo apt install -y curl exa tmux neofetch openssh-server
+	sudo apt install -y curl exa tmux neofetch openssh-server fzf ripgrep
 
 u_go:
 	@echo "[INFO]: add golang repository..."
@@ -75,3 +75,10 @@ fasd:
 tmux:
 	git clone https://github.com.cnpmjs.org/tmux-plugins/tpm ~/.tmux/plugins/tpm
 	cp tmux.conf ~/.tmux.conf
+
+KVERSION=0.15.3
+kubecm:
+	wget https://github.com/sunny0826/kubecm/releases/download/v${KVERSION}/kubecm_${KVERSION}_Linux_x86_64.tar.gz -O kubecm.tar.gz
+	mv kubecm.tar.gz /tmp
+	cd /tmp && tar -zxvf kubecm.tar.gz kubecm
+	sudo mv /tmp/kubecm /usr/local/bin/
