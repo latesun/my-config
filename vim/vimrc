@@ -1,0 +1,79 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASE SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Jump where exited last time
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Change leader key
+let g:mapleader=';'
+
+" Show number line
+set number
+
+set colorcolumn=80
+
+" Enable auto indent
+set autoindent
+set cindent
+set tabstop=4
+set shiftwidth=4
+filetype indent on
+
+" Enable syntax highlight
+syntax on
+
+" Highlight search result
+set hlsearch
+
+" Ignore case
+set ignorecase
+" If there is a capital letter, switch to case-sensitivce lookup
+set smartcase
+
+" Disable auto backup
+set nobackup
+
+" Disable generate swap file
+set noswapfile
+
+" Enable auto refresh current file when modified elsewhere
+set autoread
+au CursorHold,CursorHoldI * checktime
+
+" Enable auto save when quit unexpertedly
+set autowrite
+
+" Prompt when quit without save
+set confirm
+
+" Display cursor line
+set cursorline
+
+" Enable window modify
+set modifiable
+
+" Theme
+colorscheme gruvbox
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SHORTCUT KEY SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Change save key
+inoremap <leader>w <Esc>:w<cr>
+
+" Change esc key
+inoremap jj <Esc>
+
+" Use ctrl + h/j/k/l switch window
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Open buffers
+nnoremap <leader>b :Buffers<cr>
